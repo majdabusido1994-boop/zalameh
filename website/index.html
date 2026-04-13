@@ -202,17 +202,19 @@
     </div>
 
     <div class="grid md:grid-cols-3 gap-4">
-      <a href="#" class="cardk bg-cream2 border-2 border-ink p-6 hover:bg-sunset transition-colors">
+      <div class="cardk bg-cream2 border-2 border-ink p-6 relative opacity-80">
+        <div class="absolute -top-3 -right-3 bg-sunset text-ink text-xs font-black px-2 py-1 border-2 border-ink rotate-6">SOON</div>
         <div class="font-black text-2xl">▶ Spotify</div>
         <p class="text-sm mt-1 text-ink/70">Where 73% of his royalties come from</p>
-        <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">OPEN →</div>
-      </a>
-      <a href="#" class="cardk bg-cream2 border-2 border-ink p-6 hover:bg-sunset transition-colors">
+        <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">PROCESSING</div>
+      </div>
+      <div class="cardk bg-cream2 border-2 border-ink p-6 relative opacity-80">
+        <div class="absolute -top-3 -right-3 bg-sunset text-ink text-xs font-black px-2 py-1 border-2 border-ink rotate-6">SOON</div>
         <div class="font-black text-2xl">▶ Apple Music</div>
         <p class="text-sm mt-1 text-ink/70">For the fancy fans</p>
-        <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">OPEN →</div>
-      </a>
-      <a href="#" class="cardk bg-cream2 border-2 border-ink p-6 hover:bg-sunset transition-colors">
+        <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">PROCESSING</div>
+      </div>
+      <a href="https://www.youtube.com/@zalameh.69" target="_blank" rel="noopener" class="cardk bg-cream2 border-2 border-ink p-6 hover:bg-sunset transition-colors">
         <div class="font-black text-2xl">▶ YouTube</div>
         <p class="text-sm mt-1 text-ink/70">Watch the reels, share to 5 cousins</p>
         <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">OPEN →</div>
@@ -228,9 +230,9 @@
           A love letter to Amman from a hooded figure and a cat who keeps stealing the camera.
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
-          <a href="#" class="kbtn bg-sunset text-ink font-black px-4 py-2 border-2 border-ink">▶ PLAY</a>
-          <a href="#" class="kbtn bg-cream text-ink font-black px-4 py-2 border-2 border-ink">+ SAVE</a>
-          <a href="#" class="kbtn bg-kred text-cream font-black px-4 py-2 border-2 border-ink">SHARE</a>
+          <a href="https://www.youtube.com/@zalameh.69" target="_blank" rel="noopener" class="kbtn bg-sunset text-ink font-black px-4 py-2 border-2 border-ink">▶ WATCH TEASER</a>
+          <a href="https://ko-fi.com/zalameh" target="_blank" rel="noopener" class="kbtn bg-cream text-ink font-black px-4 py-2 border-2 border-ink">☕ SUPPORT</a>
+          <button type="button" onclick="shareZalameh()" class="kbtn bg-kred text-cream font-black px-4 py-2 border-2 border-ink">SHARE</button>
         </div>
       </div>
     </div>
@@ -263,7 +265,7 @@
           <p class="text-sm text-ink/70 mt-1">5 die-cut Zalameh stickers. Slap 'em on your laptop, fridge, ex's car.</p>
           <div class="mt-4 flex items-center justify-between">
             <span class="font-black text-2xl">$7</span>
-            <a href="#" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">ADD TO CART</a>
+            <a href="https://ko-fi.com/zalameh/shop" target="_blank" rel="noopener" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">BUY ON KO-FI</a>
           </div>
         </div>
       </div>
@@ -278,7 +280,7 @@
           <p class="text-sm text-ink/70 mt-1">Black heavyweight tee. Zalameh approved. Print-on-demand so no drama.</p>
           <div class="mt-4 flex items-center justify-between">
             <span class="font-black text-2xl">$28</span>
-            <a href="#" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">ADD TO CART</a>
+            <a href="mailto:zalameh.cat@gmail.com?subject=Tee%20Pre-order%20%E2%80%94%20The%20Hooded%20One&body=Size%3A%20%0AQty%3A%20%0AShipping%20city%3A%20%0ANotes%3A%20" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">PRE-ORDER</a>
           </div>
         </div>
       </div>
@@ -294,7 +296,7 @@
           <p class="text-sm text-ink/70 mt-1">Matte black, embroidered cat + keffiyeh chain detail. Zalameh may wear it. Rarely.</p>
           <div class="mt-4 flex items-center justify-between">
             <span class="font-black text-2xl">$59</span>
-            <a href="#" class="kbtn bg-cream2 text-ink font-black px-4 py-2 border-2 border-ink text-sm">NOTIFY ME</a>
+            <a href="mailto:zalameh.cat@gmail.com?subject=Notify%20me%20%E2%80%94%20Zalameh%20Hoodie&body=Notify%20me%20when%20the%20hoodie%20drops.%0ASize%3A%20" class="kbtn bg-cream2 text-ink font-black px-4 py-2 border-2 border-ink text-sm">NOTIFY ME</a>
           </div>
         </div>
       </div>
@@ -399,14 +401,17 @@
     </p>
     <p dir="rtl" class="font-ar mt-2 text-terra">مَرَّة بالشَّهِر. بَسّ الأشياء الحِلوة.</p>
 
-    <form class="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center max-w-lg mx-auto">
-      <input type="email" placeholder="your@email.com"
+    <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?subscribed=1" class="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center max-w-lg mx-auto">
+      <input type="hidden" name="form-name" value="newsletter" />
+      <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
+      <input type="email" name="email" required placeholder="your@email.com"
         class="w-full sm:flex-1 bg-cream border-2 border-ink px-4 py-3 font-semibold focus:outline-none focus:bg-white cardk"/>
       <button type="submit" class="kbtn w-full sm:w-auto bg-ink text-cream font-black px-6 py-3 border-2 border-ink">
         SUBSCRIBE
       </button>
     </form>
-    <p class="mt-3 text-xs text-ink/60">We use Substack free tier. You can unsubscribe any time. Zalameh won't be mad. Probably.</p>
+    <p id="subscribed-msg" class="mt-3 text-sm font-black text-terra hidden">★ You're in. Zalameh approves. ★</p>
+    <p class="mt-3 text-xs text-ink/60">One email a month. Unsubscribe any time. Zalameh won't be mad. Probably.</p>
   </div>
 </section>
 
@@ -442,10 +447,9 @@
     </div>
     <div class="flex gap-4 text-sm font-bold uppercase tracking-wider">
       <a href="https://instagram.com/zalameh.69" target="_blank" rel="noopener" class="hover:text-sunset">Instagram</a>
-      <a href="#" class="hover:text-sunset">TikTok</a>
-      <a href="#" class="hover:text-sunset">YouTube</a>
-      <a href="#" class="hover:text-sunset">Spotify</a>
-      <a href="#" class="hover:text-sunset">SoundCloud</a>
+      <a href="https://www.youtube.com/@zalameh.69" target="_blank" rel="noopener" class="hover:text-sunset">YouTube</a>
+      <a href="https://ko-fi.com/zalameh" target="_blank" rel="noopener" class="hover:text-sunset">Ko-fi</a>
+      <span class="opacity-50">Spotify (soon)</span>
     </div>
     <div class="text-xs text-cream/60">
       Made on a rooftop with tea and grains.
@@ -454,6 +458,31 @@
 </footer>
 
 <div class="keffiyeh-band h-3"></div>
+
+<script>
+  function shareZalameh() {
+    const data = {
+      title: "Zalameh — Amman's smuggest cat",
+      text: "Amman street cat running a music empire. You gotta see this.",
+      url: "https://zalameh.netlify.app"
+    };
+    if (navigator.share) {
+      navigator.share(data).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(data.url).then(() => {
+        alert("Link copied — paste it anywhere. يلا.");
+      });
+    }
+  }
+  // Newsletter subscribed confirmation
+  if (new URLSearchParams(window.location.search).get("subscribed") === "1") {
+    const msg = document.getElementById("subscribed-msg");
+    if (msg) {
+      msg.classList.remove("hidden");
+      document.getElementById("news")?.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+</script>
 
 </body>
 </html>
