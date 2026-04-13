@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AT3itMaeffEk4eXr2WFFcqgqEdqloCyT0BSwsDiRPuXWMyu8HTnS69iiFBCqJtZ7dptbSt0M8dV-8pGz&currency=USD&intent=capture" data-sdk-integration-source="button-factory"></script>
 <script>
   tailwind.config = {
     theme: {
@@ -265,7 +266,7 @@
           <p class="text-sm text-ink/70 mt-1">5 die-cut Zalameh stickers. Slap 'em on your laptop, fridge, ex's car.</p>
           <div class="mt-4 flex items-center justify-between">
             <span class="font-black text-2xl">$7</span>
-            <a href="https://ko-fi.com/zalameh/shop" target="_blank" rel="noopener" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">BUY ON KO-FI</a>
+            <button type="button" data-add-to-cart="sticker" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">ADD TO CART</button>
           </div>
         </div>
       </div>
@@ -280,7 +281,7 @@
           <p class="text-sm text-ink/70 mt-1">Black heavyweight tee. Zalameh approved. Print-on-demand so no drama.</p>
           <div class="mt-4 flex items-center justify-between">
             <span class="font-black text-2xl">$28</span>
-            <a href="mailto:zalameh.cat@gmail.com?subject=Tee%20Pre-order%20%E2%80%94%20The%20Hooded%20One&body=Size%3A%20%0AQty%3A%20%0AShipping%20city%3A%20%0ANotes%3A%20" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">PRE-ORDER</a>
+            <button type="button" data-add-to-cart="tee" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">ADD TO CART</button>
           </div>
         </div>
       </div>
@@ -298,6 +299,7 @@
             <span class="font-black text-2xl">$59</span>
             <a href="mailto:zalameh.cat@gmail.com?subject=Notify%20me%20%E2%80%94%20Zalameh%20Hoodie&body=Notify%20me%20when%20the%20hoodie%20drops.%0ASize%3A%20" class="kbtn bg-cream2 text-ink font-black px-4 py-2 border-2 border-ink text-sm">NOTIFY ME</a>
           </div>
+          <p class="mt-2 text-[11px] text-ink/50">Not yet available for purchase</p>
         </div>
       </div>
     </div>
@@ -439,7 +441,7 @@
 <footer class="bg-ink text-cream py-10">
   <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-6">
     <div class="flex items-center gap-3">
-      <img src="images/zalameh-cat.png" class="w-10 h-10 rounded-full object-cover border-2 border-cream bg-sunset/40" />
+      <img src="images/zalameh-cat.png" alt="Zalameh the cat" class="w-10 h-10 rounded-full object-cover border-2 border-cream bg-sunset/40" />
       <div>
         <div class="font-black">ZALAMEH</div>
         <div class="font-ar text-sunset text-xs">زَلَمة © 2026 — مِن قَلب الجَبَل</div>
@@ -457,9 +459,198 @@
   </div>
 </footer>
 
+<!-- FLOATING CART BUTTON -->
+<button id="cart-fab" type="button" aria-label="Open cart"
+  class="hidden fixed bottom-6 right-6 z-[60] kbtn bg-kred text-cream font-black px-5 py-4 border-2 border-ink flex items-center gap-2">
+  🛒 <span id="cart-count" class="bg-cream text-ink px-2 py-0.5 border-2 border-ink text-sm">0</span>
+  <span class="hidden sm:inline">CART</span>
+</button>
+
+<!-- CART MODAL -->
+<div id="cart-modal" class="hidden fixed inset-0 z-[70] bg-ink/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+  <div class="bg-cream text-ink w-full max-w-lg max-h-[92vh] overflow-auto border-2 border-ink cardk">
+    <div class="flex items-center justify-between border-b-2 border-ink px-5 py-4 bg-sunset">
+      <div class="font-black text-xl">🛒 Your Cart</div>
+      <button type="button" id="cart-close" class="font-black text-xl px-3 py-1 border-2 border-ink bg-cream kbtn">✕</button>
+    </div>
+    <div id="cart-items" class="p-5 space-y-4"></div>
+    <div id="cart-empty" class="p-8 text-center text-ink/60 font-bold hidden">
+      Cart is empty. Go grab a sticker.
+    </div>
+    <div id="cart-footer" class="border-t-2 border-ink p-5 bg-cream2">
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-bold">Subtotal</span>
+        <span id="cart-subtotal" class="font-black text-2xl">$0.00</span>
+      </div>
+      <p class="text-xs text-ink/60 mb-3">Physical items ship from Amman. Shipping calculated by PayPal at checkout.</p>
+      <div id="paypal-buttons" class="min-h-[40px]"></div>
+      <p id="cart-sandbox-note" class="mt-3 text-[11px] text-ink/50 text-center">⚠ Sandbox mode — test payments only. No real money.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER SUCCESS MODAL -->
+<div id="order-success" class="hidden fixed inset-0 z-[80] bg-ink/80 flex items-center justify-center p-4">
+  <div class="bg-cream border-2 border-ink cardk max-w-md w-full p-8 text-center">
+    <div class="text-6xl">🎉</div>
+    <h3 class="mt-3 font-black text-3xl">ORDER PLACED</h3>
+    <p class="mt-3 text-ink/80">Zalameh nods approvingly. We'll email you tracking within 3 days.</p>
+    <div class="mt-2 text-xs text-ink/60">Order ID: <span id="order-id" class="font-mono"></span></div>
+    <button type="button" id="order-close" class="mt-6 kbtn bg-ink text-cream font-black px-6 py-3 border-2 border-ink">OK</button>
+  </div>
+</div>
+
 <div class="keffiyeh-band h-3"></div>
 
 <script>
+  // ===== CART =====
+  const PRODUCTS = {
+    sticker: { id: 'sticker', name: 'Zalameh Sticker Pack (x5)', price: 7.00, physical: true },
+    tee:     { id: 'tee',     name: 'The Hooded One Tee',         price: 28.00, physical: true },
+  };
+  const CART_KEY = 'zalameh_cart_v1';
+
+  const loadCart = () => { try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; } catch { return {}; } };
+  const saveCart = (c) => localStorage.setItem(CART_KEY, JSON.stringify(c));
+
+  let cart = loadCart();
+
+  const cartFab = document.getElementById('cart-fab');
+  const cartCount = document.getElementById('cart-count');
+  const cartModal = document.getElementById('cart-modal');
+  const cartItems = document.getElementById('cart-items');
+  const cartEmpty = document.getElementById('cart-empty');
+  const cartFooter = document.getElementById('cart-footer');
+  const cartSubtotal = document.getElementById('cart-subtotal');
+  const ppContainer = document.getElementById('paypal-buttons');
+
+  function cartTotal() {
+    return Object.entries(cart).reduce((sum, [id, qty]) => sum + (PRODUCTS[id]?.price || 0) * qty, 0);
+  }
+  function cartCountVal() {
+    return Object.values(cart).reduce((s, q) => s + q, 0);
+  }
+
+  function renderBadge() {
+    const n = cartCountVal();
+    cartCount.textContent = n;
+    cartFab.classList.toggle('hidden', n === 0);
+  }
+
+  function renderCart() {
+    cartItems.innerHTML = '';
+    const entries = Object.entries(cart).filter(([id, q]) => q > 0 && PRODUCTS[id]);
+    if (entries.length === 0) {
+      cartEmpty.classList.remove('hidden');
+      cartFooter.classList.add('hidden');
+    } else {
+      cartEmpty.classList.add('hidden');
+      cartFooter.classList.remove('hidden');
+      entries.forEach(([id, qty]) => {
+        const p = PRODUCTS[id];
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between gap-3 border-2 border-ink p-3 bg-cream2';
+        row.innerHTML = `
+          <div class="flex-1 min-w-0">
+            <div class="font-black truncate">${p.name}</div>
+            <div class="text-sm text-ink/70">$${p.price.toFixed(2)}</div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" data-qty-dec="${id}" class="kbtn bg-cream border-2 border-ink font-black w-8 h-8">−</button>
+            <span class="font-black w-6 text-center">${qty}</span>
+            <button type="button" data-qty-inc="${id}" class="kbtn bg-cream border-2 border-ink font-black w-8 h-8">+</button>
+          </div>
+          <button type="button" data-remove="${id}" class="font-black text-kred hover:underline text-sm">remove</button>
+        `;
+        cartItems.appendChild(row);
+      });
+    }
+    cartSubtotal.textContent = '$' + cartTotal().toFixed(2);
+    renderBadge();
+    renderPaypal();
+  }
+
+  function addToCart(id) {
+    if (!PRODUCTS[id]) return;
+    cart[id] = (cart[id] || 0) + 1;
+    saveCart(cart);
+    renderBadge();
+    cartFab.animate([{transform:'scale(1)'},{transform:'scale(1.15)'},{transform:'scale(1)'}], {duration:300});
+  }
+
+  document.querySelectorAll('[data-add-to-cart]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToCart(btn.dataset.addToCart);
+      openCart();
+    });
+  });
+
+  function openCart() { cartModal.classList.remove('hidden'); renderCart(); }
+  function closeCart() { cartModal.classList.add('hidden'); }
+  cartFab.addEventListener('click', openCart);
+  document.getElementById('cart-close').addEventListener('click', closeCart);
+  cartModal.addEventListener('click', (e) => { if (e.target === cartModal) closeCart(); });
+
+  cartItems.addEventListener('click', (e) => {
+    const t = e.target;
+    if (t.dataset.qtyInc) { cart[t.dataset.qtyInc] = (cart[t.dataset.qtyInc] || 0) + 1; saveCart(cart); renderCart(); }
+    else if (t.dataset.qtyDec) {
+      cart[t.dataset.qtyDec] = Math.max(0, (cart[t.dataset.qtyDec] || 0) - 1);
+      if (cart[t.dataset.qtyDec] === 0) delete cart[t.dataset.qtyDec];
+      saveCart(cart); renderCart();
+    }
+    else if (t.dataset.remove) { delete cart[t.dataset.remove]; saveCart(cart); renderCart(); }
+  });
+
+  // ===== PAYPAL =====
+  let ppRendered = false;
+  function renderPaypal() {
+    if (!window.paypal || cartTotal() === 0) { ppContainer.innerHTML = ''; ppRendered = false; return; }
+    ppContainer.innerHTML = '';
+    ppRendered = true;
+    window.paypal.Buttons({
+      style: { layout: 'vertical', shape: 'rect', color: 'black', label: 'pay' },
+      createOrder: (data, actions) => {
+        const items = Object.entries(cart).filter(([id, q]) => q > 0 && PRODUCTS[id]).map(([id, q]) => {
+          const p = PRODUCTS[id];
+          return {
+            name: p.name,
+            unit_amount: { currency_code: 'USD', value: p.price.toFixed(2) },
+            quantity: String(q),
+            category: p.physical ? 'PHYSICAL_GOODS' : 'DIGITAL_GOODS'
+          };
+        });
+        const itemTotal = cartTotal().toFixed(2);
+        return actions.order.create({
+          purchase_units: [{
+            description: 'Zalameh merch order',
+            amount: {
+              currency_code: 'USD',
+              value: itemTotal,
+              breakdown: { item_total: { currency_code: 'USD', value: itemTotal } }
+            },
+            items
+          }],
+          application_context: { shipping_preference: 'GET_FROM_FILE', brand_name: 'Zalameh' }
+        });
+      },
+      onApprove: (data, actions) => actions.order.capture().then((details) => {
+        document.getElementById('order-id').textContent = details.id;
+        cart = {}; saveCart(cart); renderCart(); closeCart();
+        document.getElementById('order-success').classList.remove('hidden');
+      }),
+      onError: (err) => { console.error(err); alert('Payment error — try again or contact zalameh.cat@gmail.com'); }
+    }).render('#paypal-buttons');
+  }
+
+  document.getElementById('order-close').addEventListener('click', () => {
+    document.getElementById('order-success').classList.add('hidden');
+  });
+
+  // init
+  renderBadge();
+  window.addEventListener('load', () => { if (cartCountVal() > 0) renderPaypal(); });
+
   function shareZalameh() {
     const data = {
       title: "Zalameh — Amman's smuggest cat",
