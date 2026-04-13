@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zalameh — Amman's smuggest cat</title>
+<meta name="description" content="Zalameh is a street cat from Jabal Amman who runs a music empire. Sort of." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          cream: '#F7F0E3',
+          cream2: '#EDE2CC',
+          terra: '#C4572A',
+          sunset: '#F39C3E',
+          kred: '#D32F2F',
+          ink: '#1F1B18',
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          ar: ['Cairo', 'system-ui', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #F7F0E3; color: #1F1B18; }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute; inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: .35;
+    mix-blend-mode: multiply;
+  }
+  .wobble { animation: wobble 3s ease-in-out infinite; transform-origin: bottom center; }
+  @keyframes wobble {
+    0%, 100% { transform: rotate(-2deg) translateY(0); }
+    50% { transform: rotate(2deg) translateY(-6px); }
+  }
+  .tilt { animation: tilt 6s ease-in-out infinite; }
+  @keyframes tilt {
+    0%, 100% { transform: rotate(-1.5deg); }
+    50% { transform: rotate(1.5deg); }
+  }
+  .bounce-slow { animation: bs 2.2s ease-in-out infinite; }
+  @keyframes bs { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  .kbtn { box-shadow: 3px 3px 0 #1F1B18; transition: transform .15s ease, box-shadow .15s ease; }
+  .kbtn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 #1F1B18; }
+  .kbtn:active { transform: translate(1px,1px); box-shadow: 2px 2px 0 #1F1B18; }
+
+  .cardk { box-shadow: 4px 4px 0 #1F1B18; }
+
+  .stamp {
+    display: inline-block;
+    transform: rotate(-6deg);
+    padding: .35rem .7rem;
+    border: 2px solid #1F1B18;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 2rem;
+    white-space: nowrap;
+    animation: tk 22s linear infinite;
+  }
+  @keyframes tk { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .dots {
+    background-image: radial-gradient(#1F1B18 1px, transparent 1px);
+    background-size: 18px 18px;
+    background-position: 0 0;
+  }
+
+  .keffiyeh-band {
+    background:
+      repeating-linear-gradient(45deg, #D32F2F 0 10px, #F7F0E3 10px 20px, #1F1B18 20px 22px, #F7F0E3 22px 32px);
+  }
+
+  [dir="rtl"] .kbtn { box-shadow: -3px 3px 0 #1F1B18; }
+  [dir="rtl"] .kbtn:hover { box-shadow: -5px 5px 0 #1F1B18; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<!-- Top keffiyeh band -->
+<div class="keffiyeh-band h-3"></div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b-2 border-ink">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-5 py-3">
+    <a href="#" class="flex items-center gap-3">
+      <img src="images/zalameh-cat.png" alt="Zalameh" class="w-12 h-12 rounded-full object-cover border-2 border-ink bg-sunset/40" />
+      <div class="leading-tight">
+        <div class="font-black text-xl tracking-tight">ZALAMEH</div>
+        <div class="font-ar text-xs text-terra -mt-0.5">زَلَمة — قِطّ من عمّان</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-bold">
+      <a href="#listen" class="hover:text-terra">Listen</a>
+      <a href="#shop" class="hover:text-terra">Shop</a>
+      <a href="#feed" class="hover:text-kred">Feed Zalameh</a>
+      <a href="#lore" class="hover:text-terra">Lore</a>
+      <a href="#news" class="hover:text-terra">Newsletter</a>
+    </nav>
+    <a href="#feed" class="kbtn bg-kred text-cream px-4 py-2 font-black text-sm border-2 border-ink">
+      🍢 FEED ZALAMEH
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="relative overflow-hidden border-b-2 border-ink">
+  <div class="absolute inset-0 opacity-40" style="background-image:url('images/hero-duo.jpg'); background-size:cover; background-position:center;"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-cream/60 via-cream/70 to-cream"></div>
+  <div class="grain absolute inset-0"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 py-20 md:py-28 grid md:grid-cols-5 gap-8 items-center">
+    <div class="md:col-span-3">
+      <span class="stamp bg-sunset">★ Jabal Amman ★</span>
+      <h1 class="mt-5 font-black text-6xl md:text-8xl leading-none tracking-tighter">
+        ZALAMEH<span class="text-kred">.</span>
+      </h1>
+      <h2 dir="rtl" class="font-ar font-black text-3xl md:text-5xl mt-2 text-terra">
+        زَلَمة
+      </h2>
+      <p class="mt-6 text-lg md:text-xl max-w-xl font-semibold">
+        Amman's smuggest street cat. Has opinions. Makes music. Eats better than you.
+      </p>
+      <p dir="rtl" class="font-ar mt-2 text-base md:text-lg max-w-xl text-ink/80">
+        قِطّ من جَبَل عمّان. عِندُه ذوق. بيعمَل موسيقى. وبياكُل أحسَن مِنّك.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#listen" class="kbtn bg-ink text-cream px-5 py-3 font-black border-2 border-ink">▶ LISTEN NOW</a>
+        <a href="#feed" class="kbtn bg-kred text-cream px-5 py-3 font-black border-2 border-ink">🍢 BUY HIM A SHAWARMA</a>
+        <a href="#shop" class="kbtn bg-sunset text-ink px-5 py-3 font-black border-2 border-ink">🛒 SHOP</a>
+      </div>
+    </div>
+
+    <div class="md:col-span-2 relative">
+      <div class="absolute -inset-6 bg-sunset/60 rounded-full blur-3xl"></div>
+      <img src="images/zalameh-cat.png" alt="Zalameh the cat"
+        class="relative wobble mx-auto w-full max-w-xs md:max-w-sm drop-shadow-[6px_6px_0_#1F1B18] rounded-2xl border-2 border-ink bg-cream2" />
+      <div class="absolute -bottom-4 right-4 bg-ink text-cream font-black px-3 py-1 border-2 border-ink rotate-[-4deg] text-xs">
+        CEO & CAT
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="bg-ink text-cream py-3 overflow-hidden border-b-2 border-ink">
+  <div class="ticker font-black text-lg uppercase tracking-wider">
+    <div class="flex gap-10 shrink-0">
+      <span>★ NEW SINGLE OUT NOW</span>
+      <span class="text-sunset">★ Zalameh doesn't work for free</span>
+      <span>★ 3 shawarmas = 1 new bar</span>
+      <span class="text-kred">★ from the heart of the jbaal</span>
+      <span>★ مِن قَلب الجَبَل</span>
+      <span class="text-sunset">★ smug cat energy since 2026</span>
+    </div>
+    <div class="flex gap-10 shrink-0" aria-hidden="true">
+      <span>★ NEW SINGLE OUT NOW</span>
+      <span class="text-sunset">★ Zalameh doesn't work for free</span>
+      <span>★ 3 shawarmas = 1 new bar</span>
+      <span class="text-kred">★ from the heart of the jbaal</span>
+      <span>★ مِن قَلب الجَبَل</span>
+      <span class="text-sunset">★ smug cat energy since 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- LISTEN -->
+<section id="listen" class="border-b-2 border-ink dots">
+  <div class="max-w-6xl mx-auto px-5 py-20">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-10">
+      <div>
+        <span class="stamp bg-cream2">01 / LISTEN</span>
+        <h3 class="mt-3 font-black text-4xl md:text-6xl leading-none">Stream the<br/>purr-fection.</h3>
+        <p dir="rtl" class="font-ar text-terra mt-2 text-lg">اسمع قبل ما زلمة يِزعَل</p>
+      </div>
+      <p class="max-w-sm text-ink/80 font-semibold">
+        Zalameh co-produces every track. Or says he does. Nobody argues with him.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <a href="#" class="cardk bg-cream2 border-2 border-ink p-6 hover:bg-sunset transition-colors">
+        <div class="font-black text-2xl">▶ Spotify</div>
+        <p class="text-sm mt-1 text-ink/70">Where 73% of his royalties come from</p>
+        <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">OPEN →</div>
+      </a>
+      <a href="#" class="cardk bg-cream2 border-2 border-ink p-6 hover:bg-sunset transition-colors">
+        <div class="font-black text-2xl">▶ Apple Music</div>
+        <p class="text-sm mt-1 text-ink/70">For the fancy fans</p>
+        <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">OPEN →</div>
+      </a>
+      <a href="#" class="cardk bg-cream2 border-2 border-ink p-6 hover:bg-sunset transition-colors">
+        <div class="font-black text-2xl">▶ YouTube</div>
+        <p class="text-sm mt-1 text-ink/70">Watch the reels, share to 5 cousins</p>
+        <div class="mt-4 inline-block font-black border-2 border-ink px-3 py-1 bg-cream">OPEN →</div>
+      </a>
+    </div>
+
+    <div class="mt-10 bg-ink text-cream p-8 cardk border-2 border-ink relative overflow-hidden">
+      <div class="absolute -right-10 -bottom-10 text-[200px] leading-none opacity-10 font-black">♫</div>
+      <div class="relative">
+        <div class="text-sunset font-black uppercase tracking-widest text-sm">Latest Drop</div>
+        <div class="mt-2 font-black text-3xl md:text-5xl">"من قلب الجبال"</div>
+        <p class="mt-3 text-cream/80 max-w-xl">
+          A love letter to Amman from a hooded figure and a cat who keeps stealing the camera.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href="#" class="kbtn bg-sunset text-ink font-black px-4 py-2 border-2 border-ink">▶ PLAY</a>
+          <a href="#" class="kbtn bg-cream text-ink font-black px-4 py-2 border-2 border-ink">+ SAVE</a>
+          <a href="#" class="kbtn bg-kred text-cream font-black px-4 py-2 border-2 border-ink">SHARE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="bg-sunset/20 border-b-2 border-ink">
+  <div class="max-w-6xl mx-auto px-5 py-20">
+    <div class="flex items-end justify-between flex-wrap gap-4 mb-10">
+      <div>
+        <span class="stamp bg-cream">02 / SHOP</span>
+        <h3 class="mt-3 font-black text-4xl md:text-6xl leading-none">The Zalameh<br/>Collection.</h3>
+        <p dir="rtl" class="font-ar text-terra mt-2 text-lg">اشتري سِتكِر قَبِل ما زَلَمة يتجاهَلَك</p>
+      </div>
+      <p class="max-w-sm text-ink/80 font-semibold">
+        Each purchase makes Zalameh slightly less judgmental toward you. Slightly.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <!-- Sticker pack -->
+      <div class="cardk bg-cream border-2 border-ink p-5 relative">
+        <div class="absolute -top-3 -right-3 bg-kred text-cream text-xs font-black px-2 py-1 border-2 border-ink rotate-6">BESTSELLER</div>
+        <div class="aspect-square bg-cream2 border-2 border-ink flex items-center justify-center overflow-hidden">
+          <img src="images/zalameh-cat.png" alt="Sticker pack" class="w-3/4 h-3/4 object-contain tilt" />
+        </div>
+        <div class="mt-4">
+          <div class="font-black text-2xl">Sticker Pack</div>
+          <p class="text-sm text-ink/70 mt-1">5 die-cut Zalameh stickers. Slap 'em on your laptop, fridge, ex's car.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="font-black text-2xl">$7</span>
+            <a href="#" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">ADD TO CART</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tee -->
+      <div class="cardk bg-cream border-2 border-ink p-5">
+        <div class="aspect-square bg-cream2 border-2 border-ink flex items-center justify-center overflow-hidden">
+          <img src="images/hooded-front.png" alt="Tee" class="w-3/4 h-3/4 object-contain" />
+        </div>
+        <div class="mt-4">
+          <div class="font-black text-2xl">The Hooded One Tee</div>
+          <p class="text-sm text-ink/70 mt-1">Black heavyweight tee. Zalameh approved. Print-on-demand so no drama.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="font-black text-2xl">$28</span>
+            <a href="#" class="kbtn bg-ink text-cream font-black px-4 py-2 border-2 border-ink text-sm">ADD TO CART</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hoodie -->
+      <div class="cardk bg-cream border-2 border-ink p-5 relative">
+        <div class="absolute -top-3 -right-3 bg-sunset text-ink text-xs font-black px-2 py-1 border-2 border-ink rotate-6">DROPS SOON</div>
+        <div class="aspect-square bg-cream2 border-2 border-ink flex items-center justify-center overflow-hidden">
+          <img src="images/hooded-walking.png" alt="Hoodie" class="w-3/4 h-3/4 object-contain" />
+        </div>
+        <div class="mt-4">
+          <div class="font-black text-2xl">Zalameh Hoodie</div>
+          <p class="text-sm text-ink/70 mt-1">Matte black, embroidered cat + keffiyeh chain detail. Zalameh may wear it. Rarely.</p>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="font-black text-2xl">$59</span>
+            <a href="#" class="kbtn bg-cream2 text-ink font-black px-4 py-2 border-2 border-ink text-sm">NOTIFY ME</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 bg-cream border-2 border-ink cardk p-6 flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <div class="font-black text-xl">Wholesale &amp; café partners</div>
+        <p class="text-sm text-ink/70 mt-1">Cafés in Weibdeh, Rainbow St, Jabal Lweibdeh — sell Zalameh stickers, make 40% margin. Email us.</p>
+      </div>
+      <a href="mailto:zalameh.cat@gmail.com" class="kbtn bg-terra text-cream font-black px-4 py-2 border-2 border-ink">EMAIL US</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEED ZALAMEH (tip jar) -->
+<section id="feed" class="bg-ink text-cream border-b-2 border-ink relative overflow-hidden">
+  <div class="absolute -right-20 -top-20 w-96 h-96 bg-kred/30 rounded-full blur-3xl"></div>
+  <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-sunset/30 rounded-full blur-3xl"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 py-20">
+    <div class="flex flex-col items-center text-center">
+      <span class="stamp bg-sunset text-ink">03 / TIP JAR</span>
+      <h3 class="mt-4 font-black text-5xl md:text-7xl leading-none">FEED ZALAMEH</h3>
+      <p dir="rtl" class="font-ar mt-3 text-sunset text-xl">إطعِم زَلَمة، بيِذكُرَك بخير</p>
+      <p class="mt-3 max-w-xl text-cream/80 font-semibold">
+        Zalameh is a working cat with expensive tastes. Your tip directly funds:
+        <span class="text-sunset">studio time, shawarma, more shawarma, and occasional fish.</span>
+      </p>
+    </div>
+
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <a href="#" class="cardk bg-cream text-ink border-2 border-ink p-6 hover:bg-sunset transition-colors">
+        <div class="text-5xl">🍬</div>
+        <div class="mt-2 font-black text-2xl">$3</div>
+        <div class="font-black">A little treat</div>
+        <p class="text-xs text-ink/70 mt-1">One (1) shawarma. Zalameh nods politely.</p>
+      </a>
+      <a href="#" class="cardk bg-cream text-ink border-2 border-ink p-6 hover:bg-sunset transition-colors">
+        <div class="text-5xl">🍢</div>
+        <div class="mt-2 font-black text-2xl">$7</div>
+        <div class="font-black">A proper meal</div>
+        <p class="text-xs text-ink/70 mt-1">Shawarma + ayran. Zalameh blinks slowly (that's love).</p>
+      </a>
+      <a href="#" class="cardk bg-cream text-ink border-2 border-ink p-6 hover:bg-sunset transition-colors relative">
+        <div class="absolute -top-3 -right-3 bg-kred text-cream text-xs font-black px-2 py-1 border-2 border-ink rotate-6">POPULAR</div>
+        <div class="text-5xl">🎧</div>
+        <div class="mt-2 font-black text-2xl">$20</div>
+        <div class="font-black">Studio fuel</div>
+        <p class="text-xs text-ink/70 mt-1">Helps pay for mastering one bar. Zalameh will remember your name.</p>
+      </a>
+      <a href="#" class="cardk bg-cream text-ink border-2 border-ink p-6 hover:bg-kred hover:text-cream transition-colors">
+        <div class="text-5xl">👑</div>
+        <div class="mt-2 font-black text-2xl">$100</div>
+        <div class="font-black">Spoil him rotten</div>
+        <p class="text-xs mt-1 opacity-80">Name-drop in the next song credits. Zalameh considers you family.</p>
+      </a>
+    </div>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm">
+      <a href="#" class="kbtn bg-cream text-ink font-black px-4 py-2 border-2 border-cream">☕ Ko-fi</a>
+      <a href="#" class="kbtn bg-cream text-ink font-black px-4 py-2 border-2 border-cream">💛 Buy Me a Coffee</a>
+      <a href="#" class="kbtn bg-cream text-ink font-black px-4 py-2 border-2 border-cream">💳 PayPal</a>
+      <a href="#" class="kbtn bg-cream text-ink font-black px-4 py-2 border-2 border-cream">🟧 CliQ (Jordan)</a>
+    </div>
+  </div>
+</section>
+
+<!-- LORE -->
+<section id="lore" class="border-b-2 border-ink">
+  <div class="max-w-6xl mx-auto px-5 py-20 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="stamp bg-terra text-cream">04 / LORE</span>
+      <h3 class="mt-3 font-black text-4xl md:text-6xl leading-none">Who is<br/>Zalameh?</h3>
+      <div class="mt-6 space-y-4 text-lg">
+        <p>
+          A ginger tabby from Jabal Amman. Technically owned by no one. Practically the landlord of an entire neighborhood.
+        </p>
+        <p>
+          One night on a rooftop, a hooded figure played a demo beat. Zalameh sat. Zalameh listened. Zalameh nodded once.
+          That was the contract.
+        </p>
+        <p class="font-black text-terra">He has been co-signing every track since.</p>
+      </div>
+      <div dir="rtl" class="font-ar mt-6 text-ink/80 border-r-4 border-kred pr-4">
+        قِطّ شَقَر مِن جَبَل عمّان. ما عِندُه أهل، عِندُه مَملَكة.
+        لَيلة واحدة فوأ سَطِح، سَمِع بيت وأَرَّر... هاظ اللحظة صار الشريك.
+      </div>
+    </div>
+    <div class="relative">
+      <div class="absolute -inset-4 bg-sunset/40 blur-3xl rounded-full"></div>
+      <img src="images/hero-duo.jpg" alt="The duo" class="relative w-full rounded-2xl border-2 border-ink cardk" />
+      <div class="absolute top-4 left-4 stamp bg-cream rotate-[-6deg]">CERTIFIED STREET</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="news" class="bg-cream2 border-b-2 border-ink">
+  <div class="max-w-4xl mx-auto px-5 py-20 text-center">
+    <span class="stamp bg-kred text-cream">05 / NEWSLETTER</span>
+    <h3 class="mt-3 font-black text-4xl md:text-6xl leading-none">Zalameh's<br/>Monthly Meow.</h3>
+    <p class="mt-4 text-ink/80 max-w-xl mx-auto">
+      One email a month. New music, behind-the-scenes, sticker drops, and one (1) bad pun per issue. No spam — Zalameh is personally offended by spam.
+    </p>
+    <p dir="rtl" class="font-ar mt-2 text-terra">مَرَّة بالشَّهِر. بَسّ الأشياء الحِلوة.</p>
+
+    <form class="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center max-w-lg mx-auto">
+      <input type="email" placeholder="your@email.com"
+        class="w-full sm:flex-1 bg-cream border-2 border-ink px-4 py-3 font-semibold focus:outline-none focus:bg-white cardk"/>
+      <button type="submit" class="kbtn w-full sm:w-auto bg-ink text-cream font-black px-6 py-3 border-2 border-ink">
+        SUBSCRIBE
+      </button>
+    </form>
+    <p class="mt-3 text-xs text-ink/60">We use Substack free tier. You can unsubscribe any time. Zalameh won't be mad. Probably.</p>
+  </div>
+</section>
+
+<!-- CTA FOOTER -->
+<section class="bg-kred text-cream">
+  <div class="max-w-6xl mx-auto px-5 py-16 grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h3 class="font-black text-4xl md:text-6xl leading-none">Got an offer?</h3>
+      <p class="mt-3 text-cream/90 text-lg max-w-md">
+        Brand collabs, features, café partnerships, sync licensing, Amman tourism board — Zalameh reads every email. His human replies.
+      </p>
+    </div>
+    <div class="flex flex-col gap-3 items-start md:items-end">
+      <a href="mailto:zalameh.cat@gmail.com" class="kbtn bg-cream text-ink font-black px-5 py-3 border-2 border-ink text-lg">
+        ✉ zalameh.cat@gmail.com
+      </a>
+      <a href="https://instagram.com/zalameh.69" target="_blank" rel="noopener" class="kbtn bg-ink text-cream font-black px-5 py-3 border-2 border-ink text-lg">
+        📱 @zalameh.69 on IG
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-cream py-10">
+  <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <img src="images/zalameh-cat.png" class="w-10 h-10 rounded-full object-cover border-2 border-cream bg-sunset/40" />
+      <div>
+        <div class="font-black">ZALAMEH</div>
+        <div class="font-ar text-sunset text-xs">زَلَمة © 2026 — مِن قَلب الجَبَل</div>
+      </div>
+    </div>
+    <div class="flex gap-4 text-sm font-bold uppercase tracking-wider">
+      <a href="https://instagram.com/zalameh.69" target="_blank" rel="noopener" class="hover:text-sunset">Instagram</a>
+      <a href="#" class="hover:text-sunset">TikTok</a>
+      <a href="#" class="hover:text-sunset">YouTube</a>
+      <a href="#" class="hover:text-sunset">Spotify</a>
+      <a href="#" class="hover:text-sunset">SoundCloud</a>
+    </div>
+    <div class="text-xs text-cream/60">
+      Made on a rooftop with tea and grains.
+    </div>
+  </div>
+</footer>
+
+<div class="keffiyeh-band h-3"></div>
+
+</body>
+</html>

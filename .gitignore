@@ -1,0 +1,7 @@
+website/.netlify/
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+__pycache__/
+*.pyc
