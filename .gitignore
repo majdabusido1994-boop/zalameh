@@ -5,3 +5,8 @@ Thumbs.db
 node_modules/
 __pycache__/
 *.pyc
+
+# Local-only: backups and raw extracted inputs (regeneratable from archive zips)
+_pre-tag-backup/
+jordan-series/*_raw/
+jordan-series/*_check/
